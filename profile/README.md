@@ -38,7 +38,6 @@ Turn security alerts into structured investigations — from triage to closure, 
 
 ## Get involved
 
-- **Feature requests / ideas** → [Discussions](https://github.com/orgs/mlab-sh/discussions)
 - **Bug reports / PRs** → always welcome
 - **Questions** → open an issue or ping [@Sn0wAlice](https://x.com/Sn0wAlice)
 
