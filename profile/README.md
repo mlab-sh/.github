@@ -1,69 +1,47 @@
-# MLAB - Security Analysis Platform
+# MLAB
 
-**MLAB** is a security analysis platform developed by **Cyber Dream**, focused on helping developers, security teams, and researchers analyze indicators of compromise (IOCs) and digital artifacts at scale.
+> You do malware. We scan, flag, and destroy it.
 
-The platform provides structured analysis for:
-- IP addresses (IPv4, IPv6, CIDR)
-- Domains
-- Files (static & dynamic tooling)
-- Certificates & infrastructure metadata
+MLAB is a modular security analysis platform for **IOC analysis at scale** — built for developers, SOC teams, and threat researchers who need clarity, not noise.
 
-MLAB is designed with **modularity**, **traceability**, and **automation** in mind.
+---
 
-## 🚀 What is MLAB?
+## What we analyze
 
-MLAB is built to act as a **central analysis layer** between raw data and actionable insights.
+| Type | Details |
+|---|---|
+| **IP / CIDR** | IPv4, IPv6, range analysis |
+| **Domains** | DNS, infrastructure metadata |
+| **Files** | Static & dynamic analysis |
+| **Certificates** | TLS metadata, chain inspection |
 
-It combines:
-- Multiple analysis tools
-- Normalized outputs
-- A consistent UI/UX
-- A backend designed for large-scale data processing
+---
 
-The goal is **not just scanning**, but **understanding and correlating results**.
+## Products
 
-## 🛠️ Project Status
+### [mlab.sh](https://mlab.sh) — IOC & File Intelligence Platform
+Search IPs, domains, hashes and files. Get structured, enriched, actionable intelligence in seconds — powered by 20+ analysis tools.
 
-MLAB is **actively developed**.
+- IP / CIDR, domains, file hashes, certificates
+- Static & dynamic file analysis (EXE, DLL, PDF, Office…)
+- MITRE ATT&CK mapping, JS deobfuscator, and more
 
-Some modules are production-ready, while others are:
-- In active development
-- Planned
-- Open for discussion
+### [ir.mlab.sh](https://mlab.sh/ir/overview) — Self-Hosted Incident Response Platform
+Turn security alerts into structured investigations — from triage to closure, on your own infrastructure.
 
-We intentionally avoid shipping “black boxes” - transparency matters.
+- Alert ingestion via API (SIEM, EDR, email gateway…)
+- Case management, observable tracking, full audit trail
+- RBAC, team collaboration, SLA tracking
+- Deploy with Docker in under 5 min · free tier included · no vendor lock-in
 
-## 💡 Feature Requests & Ideas
+---
 
-Have an idea, a feature request, or a module you’d like to see?
+## Get involved
 
-👉 **Open a discussion or feature request here:**  
-🔗 **[github.com/orgs/mlab-sh/discussions](https://github.com/orgs/mlab-sh/discussions)**  
+- **Feature requests / ideas** → [Discussions](https://github.com/orgs/mlab-sh/discussions)
+- **Bug reports / PRs** → always welcome
+- **Questions** → open an issue or ping [@Sn0wAlice](https://x.com/Sn0wAlice)
 
-We actively review:
-- Feature ideas
-- UX improvements
-- New analysis modules
-- Tool integrations
+---
 
-## 🤝 Contributions
-
-Contributions are welcome, whether it’s:
-- Code
-- Ideas
-- Bug reports
-- Documentation
-
-Even a simple discussion can shape the roadmap.
-
-## 🌐 Platform
-
-🔗 **Website:** https://mlab.sh  
-*(Production platform - scanning subject to usage limits)*
-
-> ⚠️ **Security notice**  
-> Unauthorized penetration testing or abuse of the platform is strictly prohibited.  
-> Please refer to `security.txt` and the Terms of Service.
-
-
-**MLAB - analyze smarter, not louder.**
+<sub>⚠️ Unauthorized testing or abuse of the platform is prohibited. See <code>security.txt</code> and ToS.</sub>
