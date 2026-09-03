@@ -16,82 +16,61 @@ Built for SOC teams, DFIR and threat researchers who need signal, not noise.
 
 ## 🔎 Core - [mlab.sh](https://mlab.sh)
 
-IOC & file intelligence platform. Search IPs, domains, hashes, certs and files →
-structured, enriched, actionable intelligence in seconds, powered by 20+ analysis tools.
+IOC & file intelligence. Drop in an IP, a domain, a hash, a certificate or a file
+and get back structured, actionable context - not a page of results to triage.
 
-| Analyze          | Details                          |
-| ---------------- | -------------------------------- |
-| **IP / CIDR**    | IPv4, IPv6, range analysis       |
-| **Domains**      | DNS, passive DNS, infra pivoting |
-| **Files**        | Static & dynamic analysis        |
-| **Certificates** | TLS metadata, chain inspection   |
+```console
+$ mlab scan domain sso-login-verify.example
 
-- Static & dynamic file analysis (EXE, DLL, PDF, Office…)
-- MITRE ATT&CK mapping, JS deobfuscator, infra correlation
-- REST API + [MCP integration](https://doc.mlab.sh/docs/mlab.sh/integrations/mcp) for workflow automation
+  DNS         A 203.0.113.47 · AAAA 2001:db8::47 · no CNAME
+  Email       SPF ~all · DKIM sig1 · DMARC missing
+  TLS         Let's Encrypt · valid to 2026-10-24 · 2 issuers seen
+  Subdomains  4 found - mail, vpn, sso-portal · 1 flagged suspicious
+  Files       no security.txt · robots.txt disallows /admin
+```
+
+Files go through static and dynamic analysis (EXE, DLL, PDF, Office…), infrastructure
+gets correlated, findings get mapped to MITRE ATT&CK. All of it available through the
+[REST API](https://doc.mlab.sh/docs/mlab.sh), [MCP](https://doc.mlab.sh/docs/mlab.sh/integrations/mcp)
+and the [CLI](https://github.com/mlab-sh/mlab-cli).
 
 ---
 
 ## 🧰 Open source
 
-Rust-first, built in the open. Grab them, script them, drop them into your pipeline.
+Rust-first, built in the open. Single static binaries, no daemon, no telemetry.
 
 | Project | What it does |
 | ------- | ------------ |
-| **[mlab-cli](https://github.com/mlab-sh/mlab-cli)** | Query the mlab.sh platform straight from your terminal - scriptable IOC & file intelligence |
-| **[postmortem](https://github.com/mlab-sh/postmortem)** | Static dependency scanner (Node.js, Python, Rust, Ruby, PHP, Go, JVM). Resolves the lockfile graph, walks vendored sources, and flags suspicious patterns |
-| **[assay](https://github.com/mlab-sh/assay)** | ML model artifact security scanner (safetensors / GGUF / pickle) ⟨vérifie le wording⟩ |
-| **[n8n-node](https://github.com/mlab-sh/⟨repo⟩)** | Verified n8n community node to plug mlab.sh into your workflows ⟨confirme le nom du repo⟩ |
+| **[postmortem](https://github.com/mlab-sh/postmortem)** | Supply-chain scanner. Flags malicious install code, typosquats and shady provenance across your dependencies *and* your OS packages. Repo-reputation scoring, known-CVE intel. Node, Python, Rust, Ruby, PHP, Go, JVM |
+| **[assay](https://github.com/mlab-sh/assay)** | Offline-first scanner for ML model artifacts - safetensors, GGUF, PyTorch pickle. Know what you just downloaded before you load it |
+| **[mcpwn](https://github.com/mlab-sh/mcpwn)** | Static security scanner for MCP servers. 36 rules over tool definitions - shadowed names, rug pulls, toxic data flows, dangerous capabilities. SARIF out |
+| **[k3sec](https://github.com/mlab-sh/k3sec)** | Runtime security CLI for k3s clusters. eBPF syscall tracing and YARA detections merged into one live event stream |
 
 ---
 
-## 🧭 The ecosystem - 35 modules, 5 layers
+## 🔌 Integrations
+
+Plug mlab.sh into the tools you already use.
+
+| Integration | What it does |
+| ----------- | ------------ |
+| **[mlab-cli](https://github.com/mlab-sh/mlab-cli)** | Official command-line client for mlab.sh and the CVE API at vuln.mlab.sh |
+| **[n8n-nodes-mlab](https://github.com/mlab-sh/n8n-nodes-mlab)** | Verified n8n community node - drop IOC enrichment into any workflow |
+| **[nav-ext](https://github.com/mlab-sh/nav-ext)** | Chrome & Firefox extension. Highlights domain and IP IOCs on any page, pivot to an investigation in one click |
+| **[VS Code](https://marketplace.visualstudio.com/items?itemName=mlab-sh.vuln-scan)** | CVE scanning for your lockfiles, prioritised with EPSS and CISA KEV. Rescans on change, nothing leaves your machine until you agree |
+| **[MCP server](https://doc.mlab.sh/docs/mlab.sh/integrations/mcp)** | Give Claude, Cursor or any MCP client direct access to mlab.sh - scan IOCs and pull intel from inside your agent |
+
+---
+
+## 🧭 The ecosystem
 
 > Security is not a product. It's a practice.
 
+35 modules across governance, detection, attack surface, deception & endpoint and training.
 One data model, one API surface, one alerting pipeline. No silos, no gaps, no noise.
-✅ available · 🔜 coming soon
 
-**🏛️ Governance**
-- ✅ **[tprm.mlab.sh](https://tprm.mlab.sh/overview)** - Third-party risk management
-- ✅ **[risk.mlab.sh](https://risk.mlab.sh)** - EBIOS Risk Manager platform
-- 🔜 **pra.mlab.sh** - Business continuity & recovery
-- 🔜 **aware.mlab.sh** - Phishing simulation & awareness
-
-**🎯 Detection**
-- ✅ **[ir.mlab.sh](https://ir.mlab.sh/overview)** - Self-hosted incident response
-- ✅ **[hunt.mlab.sh](https://hunt.mlab.sh)** - Threat hunting with Sigma & YARA
-- ✅ **[actors.mlab.sh](https://actors.mlab.sh)** - Threat actor database (APTs, groups & TTPs)
-- 🔜 **siem.mlab.sh** - Log correlation & alerting
-
-**🛰️ Attack Surface**
-- ✅ **[vuln.mlab.sh](https://vuln.mlab.sh)** - Attack surface & CVE tracking
-- 🔜 **sandbox.mlab.sh** - Malware analysis & sandboxing
-- 🔜 **watch.mlab.sh** - Dark web monitoring
-
-**🍯 Deception & Endpoint**
-- 🔜 **honey.mlab.sh** - Honeypots & canary tokens
-- 🔜 **edr.mlab.sh** - Endpoint detection & response
-
-**🎓 Training**
-- ✅ **[academy.mlab.sh](https://academy.mlab.sh)** - Cybersecurity training & courses
-- ✅ **[kids.mlab.sh](https://kids.mlab.sh)** - Cyber education for kids
-
----
-
-## 🧪 Free tools - no account needed
-
-[IOC Extractor](https://mlab.sh/tool/ioc-extractor) · [JS Deobfuscator](https://mlab.sh/tool/js-deobfuscator) · [Hash Generator](https://mlab.sh/tool/hash-generator) · [EML Parser](https://mlab.sh/mail/parser) · [JWT Decoder](https://mlab.sh/tool/jwt-decoder) · [Regex Tester](https://mlab.sh/tool/regex)
-
-Plus the [MITRE ATT&CK map](https://mlab.sh/mitre/map) and [security news & advisories](https://news.mlab.sh).
-
----
-
-## 🔐 Standalone
-
-**[otp.mlab.sh](https://otp.mlab.sh)** - Encrypt. Share. Vanish.
-Send a password, API key or private note. Encrypted in your browser, handed over as a
-one-time link, destroyed the moment it's read. Client-side AES-256-GCM · zero-knowledge · EU-hosted.
+**→ [mlab.sh/ecosystem](https://mlab.sh/ecosystem)** - the full, always up-to-date list.
 
 ---
 
@@ -103,8 +82,6 @@ one-time link, destroyed the moment it's read. Client-side AES-256-GCM · zero-k
 ---
 
 <div align="center">
-
-⚠️ Unauthorized testing or abuse of the platform is prohibited. See [`security.txt`](https://mlab.sh/security.txt) and ToS.
 
 _Mlab · by Cyber Dream_ 🏴
 
